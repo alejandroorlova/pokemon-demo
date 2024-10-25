@@ -1,0 +1,3 @@
+<app-no-results *ngIf="results == null"></app-no-results>
+<app-json-viewer *ngIf="showInfoInJson && results != null" [jsonData]="results"></app-json-viewer>
+<app-pokemon-list *ngIf="showInfoInCards && results != null" [data]="pokemonList"></app-pokemon-list>

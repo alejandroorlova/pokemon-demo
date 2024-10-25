@@ -1,0 +1,47 @@
+<div class="json-viewer">
+    
+    <ng-container *ngIf="isObject(jsonData)">
+      <div *ngFor="let key of objectKeys(jsonData)" class="json-item">
+        <div class="json-item-header">
+          <span (click)="toggleExpand(key)" class="json-key">
+            {{ key }}: 
+            <span *ngIf="isObject(jsonData[key]) || isArray(jsonData[key])">▶</span>
+          </span>
+          <span *ngIf="!isObject(jsonData[key]) && !isArray(jsonData[key])" class="json-primitive">
+            {{ jsonData[key] }}
+          </span>
+        </div>
+        <div *ngIf="expanded[key]" class="json-value">
+          <app-json-viewer 
+            [jsonData]="jsonData[key]" 
+            [depth]="depth + 1">
+          </app-json-viewer>
+        </div>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="isArray(jsonData)">
+      <div *ngFor="let item of jsonData; let i = index" class="json-item">
+        <div class="json-item-header">
+          <span (click)="toggleExpand(i)" class="json-key">
+            [{{ i }}]: 
+            <span *ngIf="isObject(item) || isArray(item)">▶</span>
+          </span>
+          <span *ngIf="!isObject(item) && !isArray(item)" class="json-primitive">
+            {{ item }}
+          </span>
+        </div>
+        <div *ngIf="expanded[i]" class="json-value">
+          <app-json-viewer 
+            [jsonData]="item" 
+            [depth]="depth + 1">
+          </app-json-viewer>
+        </div>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="!isObject(jsonData) && !isArray(jsonData)">
+      <span class="json-primitive">{{ jsonData }}</span>
+    </ng-container>
+  </div>
+  

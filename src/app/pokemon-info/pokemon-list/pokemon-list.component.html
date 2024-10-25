@@ -1,0 +1,11 @@
+<div class="card-container">
+  <app-pokemon-card
+    *ngFor="let card of cards"
+    [id]="card.id"
+    [image]="card.image"
+    [name]="card.name"
+    [weight]="card.weight"
+    [height]="card.height"
+  >
+  </app-pokemon-card>
+</div>

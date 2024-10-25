@@ -1,0 +1,33 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <span class="navbar-title">Pokemon</span>
+      <button class="navbar-toggle" (click)="toggleMenu()">☰</button>
+    </div>
+    <div class="navbar-menu" [class.active]="menuOpen">
+      <select
+        class="navbar-select"
+        [(ngModel)]="selectedFilter"
+        (change)="onFilterChange()"
+      >
+        <option value="" disabled selected hidden>Choose an option</option>
+        <option *ngFor="let option of filterOptions" [value]="option.value">
+          {{ option.viewValue }}
+        </option>
+      </select>
+      <input
+        type="text"
+        class="navbar-input"
+        [(ngModel)]="searchTerm"
+        placeholder="Value"
+      />
+      <button
+        class="navbar-button"
+        (click)="onSearch()"
+        [disabled]="!isSearchEnabled()"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+</nav>
